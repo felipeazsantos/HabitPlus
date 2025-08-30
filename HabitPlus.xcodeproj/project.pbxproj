@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		973E921F2E634BE900063CDB /* HabitPlus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = HabitPlus.app; path = "/Users/felazevedo/Documents/ios-workspace/HabitPlus/build/Debug-iphoneos/HabitPlus.app"; sourceTree = "<absolute>"; };
+		97C581A02E63713E0067CAED /* HabitPlus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitPlus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -33,6 +33,7 @@
 			isa = PBXGroup;
 			children = (
 				973E92212E634BE900063CDB /* HabitPlus */,
+				97C581A02E63713E0067CAED /* HabitPlus.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,7 +59,7 @@
 			packageProductDependencies = (
 			);
 			productName = HabitPlus;
-			productReference = 973E921F2E634BE900063CDB /* HabitPlus.app */;
+			productReference = 97C581A02E63713E0067CAED /* HabitPlus.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
