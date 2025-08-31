@@ -17,46 +17,65 @@ struct SignInView: View {
     @State var action: Int? = 0
 
     var body: some View {
-        NavigationView {
-            ScrollView(showsIndicators: false) {
-                VStack(alignment: .center, spacing: 20) {
-                    
-                    Spacer(minLength: 48)
-                    
-                    VStack(alignment: .center, spacing: 8) {
-                        Image("logo")
-                            .resizable()
-                            .scaledToFit()
-                            .padding(.horizontal, 48)
+        ZStack {
+            if case SignInUIState.goToHomeScreen = viewModel.uiState {
+                viewModel.homeView()
+            } else {
+                NavigationView {
+                    ScrollView(showsIndicators: false) {
+                        VStack(alignment: .center, spacing: 20) {
 
-                        Text("Login")
-                            .foregroundColor(.orange)
-                            .font(.system(.title).bold())
-                            .padding(.bottom, 8)
+                            Spacer(minLength: 48)
 
-                        emailField
-                        passwordField
-                        enterButton
-                        registerLink
-                        
-                        Text("Copyright © 2025 HabitPlus")
-                            .foregroundColor(.gray)
-                            .font(.system(size: 16).bold())
-                            .padding(.top, 16)
+                            VStack(alignment: .center, spacing: 8) {
+                                Image("logo")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .padding(.horizontal, 48)
+
+                                Text("Login")
+                                    .foregroundColor(.orange)
+                                    .font(.system(.title).bold())
+                                    .padding(.bottom, 8)
+
+                                emailField
+                                passwordField
+                                enterButton
+                                registerLink
+
+                                Text("Copyright © 2025 HabitPlus")
+                                    .foregroundColor(.gray)
+                                    .font(.system(size: 16).bold())
+                                    .padding(.top, 16)
+                            }
+                        }
+
+                        if case SignInUIState.error(let error) = viewModel.uiState {
+                            Text("")
+                                .alert(isPresented: .constant(true)) {
+                                    Alert(
+                                        title: Text("HabitPlus"),
+                                        message: Text(error),
+                                        dismissButton: .default(Text("OK")) {
+
+                                        }
+                                    )
+                                }
+                        }
                     }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .padding(.horizontal, 32)
+                    .background(Color.white)
+                    .navigationBarTitle("Login", displayMode: .inline)
+                    .navigationBarHidden(navigationHidden)
+                }
+                .onAppear {
+                    self.navigationHidden = true
+                }
+                .onDisappear {
+                    self.navigationHidden = false
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .padding(.horizontal, 32)
-            .background(Color.white)
-            .navigationBarTitle("Login", displayMode: .inline)
-            .navigationBarHidden(navigationHidden)
-        }
-        .onAppear {
-            self.navigationHidden = true
-        }
-        .onDisappear {
-            self.navigationHidden = false
         }
     }
 }
@@ -86,7 +105,7 @@ extension SignInView {
 extension SignInView {
     var enterButton: some View {
         Button("Entrar") {
-
+            viewModel.login(email: email, password: password)
         }
     }
 }
